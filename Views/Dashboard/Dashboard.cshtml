@@ -1,0 +1,65 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div id="container">
+    <h1>Dojo Activity Center</h1>
+    <h3>Welcome @ViewBag.FirstName!</h3>
+    <a href="/logoff">Logoff</a>
+
+    <table>
+        <thead>
+            <tr>
+            <th>Activity</th> 
+            <th>Date and Time</th>
+            <th>Event Coordinator</th>
+            <th>Number of Participants</th>
+            <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach(var activity in ViewBag.Activities) {
+                    <tr>
+                        <td><a href="show_activity/@activity.Id">@activity.Title</a></td>
+                        <td>@Convert.ToString(string.Format("{0:MMMM d yyyy h:mm tt }", @activity.StartDate))</td>
+                        <td>@activity.Coname</td>
+                        <td>@activity.Duration @activity.Unit</td>
+                        <td>@activity.Participants.Count</td>
+                        
+                        @if(@ViewBag.UserId == @activity.Coordinator) {
+                            <td><a href="delete/@activity.Id">Delete</a></td>
+                        }
+                        else {
+                            bool isJoin = false;
+                            
+                                foreach(var participant in @activity.Participants) {
+                                    if(participant.UserId == @ViewBag.UserId) {
+                                        isJoin = true;
+                                        <td><a href="leave/@activity.Id">Leave</a></td>
+                                    }
+                                }
+                            
+
+                            @if(!isJoin) {
+                                <td><a href="join/@activity.Id">Join</a></td>
+                            }
+                        }
+                        
+                    </tr>
+                    
+                }
+
+            }
+
+        </tbody>
+    </table>
+
+    <br><br><br><br>
+    <form action="add_activity">
+        <input type="submit" value="Add New Activity!" />
+    </form>
+ 
+
+</div>
+

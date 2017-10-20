@@ -1,0 +1,54 @@
+@{
+    ViewData["Title"] = "Show Activity";
+}
+
+
+<div id="container">
+    <h1>Dojo Activity Center</h1>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/logoff">Logoff</a>
+
+    <h2>@ViewBag.Activity.Title</h2>
+    <br>
+    
+    <p>Event Coordinator: @ViewBag.Coordinator</p>
+    <br>
+    <p>Date: @Convert.ToString(string.Format("{0:MMMM d yyyy h:mm tt }", @ViewBag.Activity.StartDate))</p>
+    <br>
+
+    <p>Action: </p>
+        @{        
+            @if(@ViewBag.UserId == @ViewBag.Activity.Coordinator) {
+                <td><a href="/delete/@ViewBag.Activity.Id">Delete</a></td>
+            }
+            else {
+                bool isJoin = false;
+                
+                    foreach(var participant in @ViewBag.Activity.Participants) {
+                        if(participant.UserId == @ViewBag.UserId) {
+                            isJoin = true;
+                            <td><a href="/leave/@ViewBag.Activity.Id">Leave</a></td>
+                        }
+                    }
+                
+
+                @if(!isJoin) {
+                    <td><a href="/join/@ViewBag.Activity.Id">Join</a></td>
+                }
+            }
+        }
+    <br><br>
+
+    <p>Description: @ViewBag.Activity.Description</p>
+    <br><br>
+
+    <p>Participants: </p>
+
+    @{
+        foreach(var articipant in @ViewBag.Activity.Participants) {
+            <p>@articipant.User.FirstName</p>
+        }
+    }
+
+</div>
+

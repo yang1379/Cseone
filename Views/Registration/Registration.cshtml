@@ -1,0 +1,73 @@
+@model Cseone.Models.RegisterViewModel
+
+<div id="container">
+    <h1>Welcome To The Dojo Activity Center</h1>
+    <br>
+
+    <p class="error">@ViewBag.Error</p>
+    
+    <div class="login">
+        <h2>Login</h2>
+        <form asp-controller="Registration" asp-action="Login" method="post">
+            <div class='pair'>
+                <p>Email</p>
+                <input type="email" name="email" required/>
+            </div>
+
+            <div class='pair'>
+                <p>Password</p>
+                <input type="password" name="password" required/>
+            </div>
+
+            <button type="submit">Login</button>
+            <br>
+
+        </form>
+
+    </div>
+
+
+    <div class="registration">
+        <h2>Registration</h2>
+        <form asp-controller="Registration" asp-action="Registration" method="post">
+            <div class='pair'>
+                <span asp-validation-for="FirstName"></span>
+                <br>
+                <label asp-for="FirstName"></label>
+                <input required asp-for="FirstName"/>
+            </div>
+
+            <div class='pair'>
+                <span asp-validation-for="LastName"></span>
+                <br>
+                <label asp-for="LastName"></label>
+                <input required asp-for="LastName"/>
+            </div>
+
+            <div class='pair'>
+                <span asp-validation-for="Email"></span>
+                <br>
+                <label asp-for="Email"></label>
+                <input type="email" required asp-for="Email"/>
+            </div>
+
+            <div class='pair'>
+                <span asp-validation-for="Password"></span>
+                <br>
+                <label asp-for="Password"></label>
+                <input required asp-for="Password"/>
+            </div>
+            
+            <div class='pair'>
+                <span asp-validation-for="PasswordConfirmation"></span>
+                <br>
+                <label asp-for="PasswordConfirmation"></label>
+                <input required asp-for="PasswordConfirmation"/>
+            </div>
+
+            <button type="submit">Register</button>
+            <br>
+        </form>
+    </div>
+
+</div>

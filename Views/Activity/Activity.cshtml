@@ -1,0 +1,64 @@
+@{
+    ViewData["Title"] = "Dojo Activity Center";
+}
+
+@model Cseone.Models.ActivityViewModel
+
+<div id="container">
+    <h1>Dojo Activity Center</h1>
+    <a href="Dashboard">Dashboard</a>
+    <a href="/logoff">Logoff</a>
+
+    <div class="create">
+    <form asp-controller="Activity" asp-action="Create" method="post">
+        <div class="new_activity">
+            <div class='pair'>
+                <span asp-validation-for="Title"></span>
+                <br>
+                <label asp-for="Title"></label>
+                <input required asp-for="Title"/>
+            </div>
+
+            <div class='pair'>
+                <span asp-validation-for="ActivityDate"></span>
+                <br>
+                <label asp-for="ActivityDate"></label>
+                <input required type="date" asp-for="ActivityDate"/>
+            </div>
+
+            <div class='pair'>
+                <span asp-validation-for="ActivityTime"></span>
+                <br>
+                <label asp-for="ActivityTime"></label>
+                <input required type="time" asp-for="ActivityTime"/>
+            </div>
+
+            <div class='pair'>
+                <span asp-validation-for="Duration"></span>
+                <br>
+                <label asp-for="Duration"></label>
+                <input required type="Number" asp-for="Duration"/>
+                <select asp-for="Units">
+                    <option value="Hours">Hours</option>
+                    <option value="Minutes">Minutes</option>
+                    <option value="Days">Days</option>
+                </select>
+            </div>
+
+            <div class='pair'>
+                <span asp-validation-for="Description"></span>
+                <br>
+                <label asp-for="Description"></label>
+                <br><br>
+                <textarea required asp-for="Description" rows="15" cols="70"></textarea>
+            </div>
+
+            
+        </div>
+        
+        <button type="submit">Create Activity</button>
+    </form>
+    </div>
+
+</div>
+
